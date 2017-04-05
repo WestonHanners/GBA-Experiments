@@ -4,13 +4,7 @@
     "version": "0.1.0",
     "command": "make",
     "isShellCommand": true,
+    "isBuildCommand": true,    
     "args": [],
-    "showOutput": "always",
-    "tasks": [
-        {
-            "taskName": "Clean",
-            "args": [ "clean" ]
-        }
-    ]
-
+    "showOutput": "always"
 }
