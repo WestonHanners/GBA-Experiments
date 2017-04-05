@@ -80,7 +80,7 @@ CFILES		:=	$(foreach dir,$(SOURCES),$(notdir $(wildcard $(dir)/*.c)))
 CPPFILES	:=	$(foreach dir,$(SOURCES),$(notdir $(wildcard $(dir)/*.cpp)))
 SFILES		:=	$(foreach dir,$(SOURCES),$(notdir $(wildcard $(dir)/*.s)))
 BINFILES	:=	$(foreach dir,$(DATA),$(notdir $(wildcard $(dir)/*.*)))
-GFXFILES    := $(foreach dir, $(GRAPHICS), $(notdir $(wildcard $(dir)/*.png)))
+GFXFILES    :=  $(foreach dir, $(GRAPHICS), $(notdir $(wildcard $(dir)/*.bmp)))
 
 ifneq ($(strip $(MUSIC)),)
 	export AUDIOFILES	:=	$(foreach dir,$(notdir $(wildcard $(MUSIC)/*.*)),$(CURDIR)/$(MUSIC)/$(dir))
@@ -106,7 +106,7 @@ export OFILES_BIN := $(addsuffix .o,$(BINFILES))
 export OFILES_SOURCES := $(CPPFILES:.cpp=.o) $(CFILES:.c=.o) $(SFILES:.s=.o)
  
 export OFILES   :=  $(addsuffix .o,$(BINFILES)) \
-                    $(GFXFILES:.png=.o)         \
+                    $(GFXFILES:.bmp=.c)         \
                     $(CPPFILES:.cpp=.o) $(CFILES:.c=.o) $(SFILES:.s=.o)
 
 export HFILES := $(addsuffix .h,$(subst .,_,$(BINFILES)))
@@ -156,12 +156,12 @@ soundbank.bin soundbank.h : $(AUDIOFILES)
 	@mmutil $^ -osoundbank.bin -hsoundbank.h
 
 # With matching grit-file
-%.s %.h	: %.png %.grit
-	$(GRIT) $< -pu16 -fts
+%.c %.h	: %.bmp %.grit
+	$(GRIT) $< -ftc 
 
 # No grit-file: try using dir.grit
-%.s %.h	: %.png
-	$(GRIT) $< -pu16 -fts -ff $(<D)/$(notdir $(<D)).grit
+%.c %.h	: %.bmp
+	$(GRIT) $< -ftc -ff $(<D)/$(notdir $(<D)).grit
 
 #---------------------------------------------------------------------------------
 # This rule links in binary data with the .bin extension

@@ -1,0 +1,13 @@
+[{
+    "key": "cmd+shift+b",
+    "command": "task",
+    "when": "Build"
+},{
+    "key": "cmd+shift+c",
+    "command": "task",
+    "when": "Clean"
+},{
+    "key": "cmd+shift+r",
+    "command": "task",
+    "when": "Run"
+}]
