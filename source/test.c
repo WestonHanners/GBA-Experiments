@@ -6,7 +6,7 @@ int main()
 {
     REG_DISPLAYCONTROL = VIDEOMODE_3 | BGMODE_2;
     Color c = MakeColor(255,0,0);
-    circler(100,100,50,c,8);
+    circler(230,60,50,c,6);
     while(1)
     {
         // vsync();

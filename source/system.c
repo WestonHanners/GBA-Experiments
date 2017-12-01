@@ -12,37 +12,43 @@ void vsync()
   while (REG_VCOUNT < 160);
 }
 
-void pset(uint8 x, uint8 y, Color color) 
+void pset(uint16 x, uint16 y, Color color) 
 {
-  if (x >= SCREEN_W || y >= SCREEN_H) { return; }
-  // if (x <= 0 || y <= 0) { return; }
+  if (x >= SCREEN_W || y >= SCREEN_H) 
+  { 
+    return;
+  }
+  if (x <= 0 || y <= 0) 
+  { 
+    return; 
+  }
   SCREENBUFFER[(y * SCREEN_W) + x] = color;
 }
 
-void circler(uint8 x, uint8 y, uint8 r, Color color, uint8 i) 
+void circler(uint16 x, uint16 y, uint16 r, Color color, uint8 i) 
 {
   for (double iteration = i; iteration > 0; iteration-=0.5) {
     circle(x,y,r-iteration,color);
   }
 }
 
-void circle(uint8 x, uint8 y, uint8 r, Color color) 
+void circle(uint16 x, uint16 y, uint16 r, Color color) 
 {
   for (double angle = 0.0; angle < (2*M_PI); angle = angle + 0.05) {
-    uint8 px = round(r * cos(angle) + x);
-    uint8 py = round(r * sin(angle) + y);
+    uint16 px = round(r * cos(angle) + x);
+    uint16 py = round(r * sin(angle) + y);
     pset(px,py,color);
   }
 }
 
-uint8 clampx(uint8 x) 
+uint16 clampx(uint16 x) 
 {
   if (x > SCREEN_W-1) { return 0; }
   if (x < 0) { return 0; }
   return x;
 }
 
-uint8 clampy(uint8 y) 
+uint16 clampy(uint16 y) 
 {
   if (y > SCREEN_H-1) { return 0; }
   if (y < 0) { return 0; }
