@@ -1,0 +1,4 @@
+#!/usr/local/bin/fish
+
+set -Ux DEVKITPRO ~/devkitPro
+set -Ux DEVKITARM ~/devkitPro/devkitARM

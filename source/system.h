@@ -36,4 +36,9 @@ typedef struct ObjectAttributes {
 } __attribute__((packed, aligned(4))) ObjectAttributes;
 
 void vsync();
+void pset(uint8 x, uint8 y, Color color);
+void circler(uint8 x, uint8 y, uint8 r, Color color, uint8 i);
+void circle(uint8 x, uint8 y, uint8 r, Color color);
+uint8 clampx(uint8 x);
+uint8 clampy(uint8 y);
 Color MakeColor(uint8 red, uint8 green, uint8 blue);

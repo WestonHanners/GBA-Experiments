@@ -4,24 +4,13 @@
 
 int main()
 {
-    memcpy(MEM_PALETTE, dubyaPal,  dubyaPalLen );
-    memcpy(&MEM_TILE[4][1], dubyaTiles, dubyaTilesLen);
-
-    volatile ObjectAttributes *spriteAttribs = &MEM_OAM[0];
-
-    spriteAttribs->attr0 = 0x3032; // 8bpp tiles, SQUARE shape, at y coord 50
-    spriteAttribs->attr1 = 0x4064; // 16x16 size when using the SQUARE shape
-    spriteAttribs->attr2 = 2;      // Start at the first tile in tile
-
-    REG_DISPLAYCONTROL = VIDEOMODE_0 | ENABLE_OBJECTS | MAPPINGMODE_1D;
-
-    int x = 0;
-
+    REG_DISPLAYCONTROL = VIDEOMODE_3 | BGMODE_2;
+    Color c = MakeColor(255,0,0);
+    circler(100,100,50,c,8);
     while(1)
     {
-        vsync();
-        x = (x+1) % (SCREEN_W);
-        spriteAttribs->attr1 = 0x4000 | (0x1FF & x);
+        // vsync();
+        // offsetX++;
     }
     return 0;
 } 
